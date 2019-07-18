@@ -1,12 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
+
 <head>
   <meta charset="UTF-8">
   <title>wikiBeer</title>
   <link rel="stylesheet" href="./css/main.css">
 </head>
+
 <body>
-  
+  <header>
+    <div class="main-header">
+      <div class="container">
+        <button class="main-header__favorite button button--red " type="button">favorite</button>
+        <button class="main-header__sing-in button button--red " type="button">sing in</button>
+      </div>
+    </div>
+    <section class="search-sort container">
+      <h1 class="visually-hidden">Поиск и сортировка</h1>
+      <input type="search" role="search" />
+      <div class="sort">
+        <button class="button button--red button__sort" type="button">Сортировка</button>
+        <button class="button button--red  button__sort" type="button">Сортировка</button>
+        <button class="button button--red  button__sort" type="button">Сортировка</button>
+      </div>
+    </section>
+  </header>
+  <main>
+
+    <article class="beer-card">
+
+    </article>
+
+  </main>
+  <footer>
+    <nav class="paggination">
+      <ul class="paggination__list">
+        <li><a href="#">left</a>&nbsp;</li>
+        <li><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a>...</li>
+        <li><a href="#">right</a></li>
+      </ul>
+    </nav>
+  </footer>
   <script src="./ts/main.ts"></script>
 </body>
+
 </html>

@@ -1,0 +1,100 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.visually-hidden:not(:focus):not(:active),
+input[type="checkbox"].visually-hidden,
+input[type="radio"].visually-hidden {
+  position: absolute;
+
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+
+  white-space: nowrap;
+
+  -webkit-clip-path: inset(100%);
+
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+.button {
+  display: inline-block;
+
+  padding: 10px;
+
+  font-size: 16px;
+  line-height: 18px;
+
+  color: #ffffff;
+  text-align: center;
+  text-transform: uppercase;
+  
+  border: none;
+  border-radius: 3px;
+
+  cursor: pointer;
+}
+
+.button--red {
+    background-color: #fb565a;
+}
+
+.button--red:hover,
+.button--red:focus {
+    background-color: #e74246;
+}
+
+.button--red:active {
+  color: rgba(255, 255, 255, 0.3);
+
+  background-color: #d7373b;
+  box-shadow: 0 3px rgba(0, 0, 0, 0.1) inset;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 960px;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.main-header {
+  margin-bottom: 1rem;
+
+  background-color: grey;
+}
+
+.main-header__sing-in {
+  text-align: right;
+}
+
+.beer-card {
+  
+}
+
+.paggination__list {
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  justify-content: center;
+
+  list-style: none;
+}
+
+.paggination__list a {
+  color: black;
+  text-decoration: none;
+}
+
+.paggination__list a:hover,
+.paggination__list a:focus {
+  border-bottom: 1px solid black;
+}
