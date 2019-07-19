@@ -109,15 +109,15 @@
     <form class="modal-login__form" action="#" method="post">
       <p class="modal-login__item">
         <label class="visually-hidden" for="user-name">Имя</label>
-        <input type="text" class="modal-login__input" id="user-name" name="user-name" placeholder="Имя..." required />
+        <input type="text" class="modal-login__input" id="user-name" name="login" placeholder="Имя..." autocomplete="username" required />
       </p>
       <p class="modal-login__item">
         <label class="visually-hidden" for="user-email">Email</label>
-        <input type="email" class="modal-login__input" id="user-email" name="user-email" placeholder="Email..." required />
+        <input type="email" class="modal-login__input" id="user-email" name="email" placeholder="Email..." autocomplete="email" required />
       </p>
       <p class="modal-login__item">
         <label class="visually-hidden" for="user-password">Пароль</label>
-        <input type="password" class="modal-login__input" id="user-password" name="user-password" placeholder="Пароль..." required />
+        <input type="password" class="modal-login__input" id="user-password" name="password" placeholder="Пароль..." minlength="6" maxlength="12" autocomplete="current-password" required />
       </p>
       <button class="modal-login__button modal-login__button--submit button button--red" type="submit">Войти</button>
       <button class="modal-login__button 
