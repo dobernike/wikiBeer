@@ -8,8 +8,8 @@
 </head>
 
 <body>
-  <header>
-    <div class="main-header">
+  <header class="main-header">
+    <div class="main-header__wrapper">
       <div class="container">
         <button class="main-header__favorite button button--red " type="button">favorite</button>
         <button class="main-header__sing-in button button--red " type="button">sing in</button>
@@ -25,9 +25,59 @@
       </div>
     </section>
   </header>
-  <main>
+  <main class="container">
+    <article class="beer-card">
+      <h2 class="visually-hidden">Карточка товара "пива"</h2>
+      <img class="beer-card__image" src="http://dummyimage.com/320&text=image_url" h alt="Бутылка пива" />
+      <div class="beer-card__wrapper">
+        <p class="beer-card__name">name</p>
+        <p class="beer-card__brewed">first_brewed</p>
+      </div>
+      <p class="beer-card__description">description</p>
+    </article>
 
     <article class="beer-card">
+      <h2 class="visually-hidden">Карточка товара "пива"</h2>
+      <img class="beer-card__image" src="http://dummyimage.com/320&text=image_url" alt="Бутылка пива" />
+      <div class="beer-card__wrapper">
+        <p class="beer-card__name">name</p>
+        <p class="beer-card__brewed">first_brewed</p>
+      </div>
+      <p class="beer-card__description">description</p>
+    </article>
+
+    <article class="beer-card">
+      <h2 class="visually-hidden">Карточка товара "пива"</h2>
+      <img class="beer-card__image" src="http://dummyimage.com/320&text=image_url" alt="Бутылка пива" />
+      <div class="beer-card__wrapper">
+        <p class="beer-card__name">name</p>
+        <p class="beer-card__brewed">first_brewed</p>
+      </div>
+      <p class="beer-card__description">description</p>
+    </article>
+
+    <article class="beer-card">
+      <h2 class="visually-hidden">Карточка товара "пива"</h2>
+      <img class="beer-card__image" src="http://dummyimage.com/320&text=image_url" alt="Бутылка пива" />
+      <div class="beer-card__wrapper">
+        <p class="beer-card__name">name</p>
+        <p class="beer-card__brewed">first_brewed</p>
+      </div>
+      <p class="beer-card__description">description</p>
+    </article>
+
+    <article class="beer-card">
+      <h2 class="visually-hidden">Карточка товара "пива"</h2>
+      <img class="beer-card__image" src="http://dummyimage.com/320&text=image_url" alt="Бутылка пива" />
+      <div class="beer-card__wrapper">
+        <p class="beer-card__name">name</p>
+        <p class="beer-card__brewed">first_brewed</p>
+      </div>
+      <p class="beer-card__description">description</p>
+    </article>
+
+    <article class="beer-card">
+      <h2 class="visually-hidden">Карточка товара "пива"</h2>
       <img class="beer-card__image" src="http://dummyimage.com/320&text=image_url" alt="Бутылка пива" />
       <div class="beer-card__wrapper">
         <p class="beer-card__name">name</p>
@@ -37,17 +87,45 @@
     </article>
 
   </main>
-  <footer>
-    <nav class="paggination">
+  <footer class="main-footer">
+    <nav class="paggination" role="navigation">
       <ul class="paggination__list">
         <li><a href="#">left</a>&nbsp;</li>
         <li><a href="#">1</a></li>
         <li><a href="#">2</a></li>
-        <li><a href="#">3</a>...</li>
+        <li><a href="#">3</a></li>
         <li><a href="#">right</a></li>
       </ul>
     </nav>
   </footer>
+
+  <div class="modal modal-login">
+    <h2 class="modal-login__title">
+      Личный кабинет
+    </h2>
+    <p class="modal-login__text">
+      Введите свой логин и пароль, чтобы войти
+    </p>
+    <form class="modal-login__form" action="#" method="post">
+      <p class="modal-login__item">
+        <label class="visually-hidden" for="user-name">Имя</label>
+        <input type="text" class="modal-login__input" id="user-name" name="user-name" placeholder="Имя..." required />
+      </p>
+      <p class="modal-login__item">
+        <label class="visually-hidden" for="user-email">Email</label>
+        <input type="email" class="modal-login__input" id="user-email" name="user-email" placeholder="Email..." required />
+      </p>
+      <p class="modal-login__item">
+        <label class="visually-hidden" for="user-password">Пароль</label>
+        <input type="password" class="modal-login__input" id="user-password" name="user-password" placeholder="Пароль..." required />
+      </p>
+      <button class="modal-login__button modal-login__button--submit button button--red" type="submit">Войти</button>
+      <button class="modal-login__button 
+      modal-login__button--close button" type="button">Закрыть</button>
+    </form>
+  </div>
+
+  <div class="modal-overlay"></div>
   <script src="./ts/main.ts"></script>
 </body>
 
