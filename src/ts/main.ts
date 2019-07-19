@@ -1,17 +1,12 @@
 // modal sing-in
 const singIn = document.querySelector(".main-header__sing-in");
-const successPopup = document.querySelector(".modal-success");
 const popup = document.querySelector(".modal-login");
 const close = popup.querySelector(".modal-login__button--close");
-const overlay = document.querySelector(".modal-overlay");
-
 const form = popup.querySelector(".modal-login__form");
 const login = popup.querySelector("[name=login]");
 const email = popup.querySelector("[name=email]");
 const password = popup.querySelector("[name=password]");
-
-let isStorageSupport = true;
-let storage = "";
+const overlay = document.querySelector(".modal-overlay");
 
 singIn.addEventListener("click", evt => {
   evt.preventDefault();
@@ -25,13 +20,13 @@ close.addEventListener("click", evt => {
   overlay.classList.remove("modal-show");
 });
 
-overlay.addEventListener("click", function(evt) {
+overlay.addEventListener("click", evt => {
   evt.preventDefault();
   popup.classList.remove("modal-show");
   overlay.classList.remove("modal-show");
 });
 
-window.addEventListener("keydown", function(evt) {
+window.addEventListener("keydown", evt => {
   if (evt.key === `Escape`) {
     evt.preventDefault();
     popup.classList.remove("modal-show");
@@ -39,11 +34,9 @@ window.addEventListener("keydown", function(evt) {
   }
 });
 
-form.addEventListener("submit", function(evt) {
+form.addEventListener("submit", evt => {
   evt.preventDefault();
   popup.classList.remove("modal-show");
   overlay.classList.remove("modal-show");
   console.warn("Вы вошли!");
 });
-
-// const API = "https://api.punkapi.com/v2/";
