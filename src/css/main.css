@@ -89,11 +89,18 @@ img {
 }
 /* main */
 .beer-card {
-  width: 320px;
+  box-sizing: border-box;
+
+  margin-bottom: 2rem; 
+  position: relative;
+  width: 300px;
+
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1.1fr 0.9fr;
-  grid-template-areas: "beer-card__image beer-card__wrapper . ." "beer-card__description beer-card__description . ." ". . . .";
+  grid-template-areas: "beer-card__image beer-card__wrapper" "beer-card__description beer-card__description";
+
+  border: 1px solid grey;
 }
 
 .beer-card__image {
@@ -108,6 +115,15 @@ img {
 .beer-card__description {
   padding: 0 20px;
   grid-area: beer-card__description;
+}
+
+.beer-card__favorite-checkbox {
+  position: absolute;
+
+  bottom: 5px;
+  right: 5px;
+
+  cursor: pointer;
 }
 
 /* footer */
