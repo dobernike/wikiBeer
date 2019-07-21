@@ -95,7 +95,7 @@ img {
 .beer-card {
   box-sizing: border-box;
 
-  margin-bottom: 2rem; 
+  margin-bottom: 2rem;
   position: relative;
   width: 300px;
 
@@ -137,11 +137,11 @@ img {
   margin-top: 2rem;
 }
 
-.paggination {
+.pagination {
   margin-bottom: 2rem;
 }
 
-.paggination__list {
+.pagination__list {
   margin: 0;
   padding: 0;
 
@@ -151,15 +151,15 @@ img {
   list-style: none;
 }
 
-.paggination__list a {
+.pagination__list a {
   margin-right: 1rem;
 
   color: black;
   text-decoration: none;
 }
 
-.paggination__list a:hover,
-.paggination__list a:focus {
+.pagination__list a:hover,
+.pagination__list a:focus {
   border-bottom: 1px solid black;
 }
 
