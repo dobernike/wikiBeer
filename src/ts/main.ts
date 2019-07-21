@@ -53,7 +53,21 @@ const PAGE = {
 const main = document.querySelector(".main");
 const cards = main.querySelectorAll(".beer-card");
 
+main.addEventListener("click", function favoriteHandler(evt) {
+  const favorite = evt.target as HTMLElement;
+  if (favorite.tagName !== "INPUT") {
+    return;
+  }
 
+  const beerName = favorite.parentElement.querySelector(".beer-card__name")
+    .innerText;
+
+  if (!favorite.checked) {
+    localStorage.removeItem(`favorite_${beerName}`);
+  } else {
+    localStorage.setItem(`favorite_${beerName}`, "true");
+  }
+});
 
 const pagination = document.querySelector(".pagination__list");
 const paginationItems = pagination.children;
