@@ -152,15 +152,27 @@ img {
 }
 
 .pagination__list a {
-  margin-right: 1rem;
+  margin: 0;
+  padding: 0 1rem;
+  padding-top: 1rem;
+  padding-bottom: 0.3rem;
 
-  color: black;
+  color: #4285f4;
   text-decoration: none;
 }
 
-.pagination__list a:hover,
-.pagination__list a:focus {
+.pagination__list :not(.active) a:hover {
   border-bottom: 1px solid black;
+}
+
+.pagination__list .active {
+  border: 2px solid aquamarine;
+  border-radius: 50px;
+}
+
+.pagination__list .active a {
+  cursor: auto;
+  color: #000000;
 }
 
 /* keyframes */
