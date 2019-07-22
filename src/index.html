@@ -17,7 +17,12 @@
     </div>
     <section class="search-sort container">
       <h1 class="visually-hidden">Поиск и сортировка</h1>
-      <input type="search" role="search" />
+      <form class="search" action="#">
+        <input type="search" list="beer">
+        <datalist id="beer">
+          <option value=""></option>
+        </datalist>
+      </form>
       <div class="sort">
         <button class="button button--red button__sort" type="button">Сортировка</button>
         <button class="button button--red button__sort" type="button">Сортировка</button>

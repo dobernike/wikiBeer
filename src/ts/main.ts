@@ -69,25 +69,13 @@ const getBeers = async (currentPage: number) => {
   const json = await res.json();
   const beers = json.map(_transformBeers);
   // Rerender DOM
-  cards.forEach((card, index) => {
-    const beer = beers[index];
-    const img = card.querySelector(".beer-card__image");
-    img.src = beer.img;
-    const name = card.querySelector(".beer-card__name");
-    name.innerText = "name: " + beer.name;
-    const tagline = card.querySelector(".beer-card__tagline");
-    tagline.innerText = "tagline: " + beer.tagline;
-    const abv = card.querySelector(".beer-card__abv");
-    abv.innerText = "abv: " + beer.abv;
-    const brewed = card.querySelector(".beer-card__brewed");
-    brewed.innerText = "brewed: " + beer.brewed;
-    const description = card.querySelector(".beer-card__description");
-    description.innerText = "description: " + beer.description;
-    const favorite = card.querySelector(".beer-card__favorite-checkbox");
-    if (localStorage.length > 0) {
-      favorite.checked = localStorage.getItem(`favorite_${name.innerText}`);
-    }
+  main.innerHTML = "";
+  const beersNames = [];
+  beers.forEach(beer => {
+    beersNames.push(beer.name);
+    createCard(beer);
   });
+  createSearch(beersNames);
 };
 getBeers(PAGE.current);
 
@@ -167,3 +155,96 @@ main.addEventListener("click", function favoriteHandler(evt) {
     localStorage.setItem(`favorite_${beerName}`, "true");
   }
 });
+
+// CreateBeerCard
+const createCard = beer => {
+  const card = document.createElement("article");
+  card.className = "beer-card";
+
+  // const img = card.querySelector(".beer-card__image");
+  const img = document.createElement("img");
+  img.className = "beer-card__image";
+  img.src = beer.img;
+  card.appendChild(img);
+  const wrapper = document.createElement("div");
+  // const name = card.querySelector(".beer-card__name");
+  const name = document.createElement("p");
+  name.className = "beer-card__name";
+  name.innerText = "name: " + beer.name;
+  wrapper.appendChild(name);
+  // const tagline = card.querySelector(".beer-card__tagline");
+  const tagline = document.createElement("p");
+  tagline.className = "beer-card__tagline";
+  tagline.innerText = "tagline: " + beer.tagline;
+  wrapper.appendChild(tagline);
+  // const abv = card.querySelector(".beer-card__abv");
+  const abv = document.createElement("p");
+  abv.className = "beer-card__abv";
+  abv.innerText = "abv: " + beer.abv;
+  wrapper.appendChild(abv);
+  // const brewed = card.querySelector(".beer-card__brewed");
+  const brewed = document.createElement("p");
+  brewed.className = "beer-card__brewed";
+  brewed.innerText = "brewed: " + beer.brewed;
+  wrapper.appendChild(brewed);
+  card.appendChild(wrapper);
+  // const description = card.querySelector(".beer-card__description");
+  const description = document.createElement("p");
+  description.className = "beer-card__description";
+  card.appendChild(description);
+  // description.innerText = "description: " + beer.description;
+  // const favorite = card.querySelector(".beer-card__favorite-checkbox");
+  const favorite = document.createElement("input");
+  favorite.className = "beer-card__favorite-checkbox";
+  favorite.type = "checkbox";
+  favorite.title = "В избранное";
+  if (localStorage.length > 0) {
+    if (localStorage.getItem(`favorite_${name.innerText}`)) {
+      favorite.checked = true;
+    } else {
+      favorite.checked = false;
+    }
+  }
+  card.appendChild(favorite);
+
+  main.appendChild(card);
+};
+
+// Search
+const searchFlex = document.querySelector(".search-sort");
+
+const createSearch = beersNames => {
+  const mockSearch = searchFlex.querySelector(".search");
+
+  const search = document.createElement("form");
+  search.className = "search";
+
+  const input = document.createElement("input");
+  input.type = "search";
+  input.name = "search-input";
+  input.setAttribute("list", "beer");
+
+  const datalist = document.createElement("datalist");
+  datalist.id = "beer";
+
+  beersNames.forEach(name => {
+    const option = document.createElement("option");
+    option.value = name;
+    datalist.appendChild(option);
+  });
+
+  search.appendChild(input);
+  search.appendChild(datalist);
+  main.appendChild(search);
+
+  search.addEventListener("submit", evt => {
+    evt.preventDefault();
+    const search = evt.target[0] as HTMLElement;
+    console.log(search.value);
+    if (beersNames.includes(search.value)) {
+      console.log("success");
+    }
+  });
+
+  searchFlex.replaceChild(search, mockSearch);
+};
