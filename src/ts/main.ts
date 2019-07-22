@@ -215,6 +215,7 @@ const searchFlex = document.querySelector(".search-sort");
 
 const createSearch = beersNames => {
   const mockSearch = searchFlex.querySelector(".search");
+  mockSearch.removeEventListener("submit", searchHandler);
 
   const search = document.createElement("form");
   search.className = "search";
@@ -237,14 +238,15 @@ const createSearch = beersNames => {
   search.appendChild(datalist);
   main.appendChild(search);
 
-  search.addEventListener("submit", evt => {
+  search.addEventListener("submit", searchHandler);
+  function searchHandler(evt) {
     evt.preventDefault();
     const search = evt.target[0] as HTMLElement;
     console.log(search.value);
     if (beersNames.includes(search.value)) {
       console.log("success");
     }
-  });
+  }
 
   searchFlex.replaceChild(search, mockSearch);
 };
