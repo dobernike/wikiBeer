@@ -167,6 +167,7 @@ const createCard = beer => {
   img.src = beer.img;
   card.appendChild(img);
   const wrapper = document.createElement("div");
+  wrapper.className = "beer-card__wrapper";
   // const name = card.querySelector(".beer-card__name");
   const name = document.createElement("p");
   name.className = "beer-card__name";
