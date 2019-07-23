@@ -172,8 +172,6 @@ favoriteBtn.addEventListener("click", (evt: MouseEvent) => {
 
     const newMain = new DocumentFragment();
 
-    console.log(cache);
-
     for (const item of cache) {
       const cacheItemName = item.querySelector(".beer-card__beer-name")
         .textContent;
