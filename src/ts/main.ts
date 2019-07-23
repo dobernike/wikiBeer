@@ -193,7 +193,7 @@ const createCard = beer => {
   const description = document.createElement("p");
   description.className = "beer-card__description";
   card.appendChild(description);
-  // description.innerText = "description: " + beer.description;
+  description.innerText = "description: " + beer.description;
   // const favorite = card.querySelector(".beer-card__favorite-checkbox");
   const favorite = document.createElement("input");
   favorite.className = "beer-card__favorite-checkbox";
@@ -214,7 +214,7 @@ const createCard = beer => {
 // Search
 const searchFlex = document.querySelector(".search-sort");
 
-const createSearch = beersNames => {
+const createSearch = (beersNames: string[]) => {
   const mockSearch = searchFlex.querySelector(".search");
   mockSearch.removeEventListener("submit", searchHandler);
 
@@ -240,12 +240,21 @@ const createSearch = beersNames => {
   main.appendChild(search);
 
   search.addEventListener("submit", searchHandler);
-  function searchHandler(evt) {
+  function searchHandler(evt: MouseEvent) {
     evt.preventDefault();
     const search = evt.target[0] as HTMLElement;
-    console.log(search.value);
+
     if (beersNames.includes(search.value)) {
-      console.log("success");
+      const beerCards = main.children;
+
+      for (const beerCard of beerCards) {
+        beerCard.setAttribute("style", "");
+        const cardName = beerCard.querySelector(`.beer-card__name`);
+
+        if (cardName.textContent === `name: ${search.value}`) {
+          beerCard.setAttribute("style", "border-color: red; order: -1;");
+        }
+      }
     }
   }
 
