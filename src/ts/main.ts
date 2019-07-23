@@ -239,6 +239,7 @@ const createSearch = (beersNames: string[]) => {
   input.type = "search";
   input.name = "search-input";
   input.setAttribute("list", "beer");
+  input.required = true;
 
   const datalist = document.createElement("datalist");
   datalist.id = "beer";
@@ -249,13 +250,22 @@ const createSearch = (beersNames: string[]) => {
     datalist.appendChild(option);
   });
 
+  const submit = document.createElement("button");
+  submit.className = "button button--red";
+  submit.innerText = "Search";
+  submit.type = "submit";
+  submit.setAttribute("style", "margin-left: 10px");
+
   search.appendChild(input);
   search.appendChild(datalist);
+  search.appendChild(submit);
+
   main.appendChild(search);
 
   search.addEventListener("submit", searchHandler);
   function searchHandler(evt: MouseEvent) {
     evt.preventDefault();
+
     const search = evt.target[0] as HTMLElement;
 
     if (beersNames.includes(search.value)) {
