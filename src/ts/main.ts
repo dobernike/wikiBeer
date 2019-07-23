@@ -171,11 +171,12 @@ const createCard = beer => {
   // const name = card.querySelector(".beer-card__name");
   const name = document.createElement("p");
   name.className = "beer-card__name";
+  name.innerText = "name: ";
 
   const beerName = document.createElement("span");
   beerName.className = "beer-card__beer-name";
   beerName.innerText = beer.name;
-  name.innerText = "name: ";
+
   name.appendChild(beerName);
 
   wrapper.appendChild(name);
@@ -187,7 +188,14 @@ const createCard = beer => {
   // const abv = card.querySelector(".beer-card__abv");
   const abv = document.createElement("p");
   abv.className = "beer-card__abv";
-  abv.innerText = "abv: " + beer.abv;
+  abv.innerText = "abv: ";
+
+  const beerAbv = document.createElement("span");
+  beerAbv.className = "beer-card__beer-abv";
+  beerAbv.innerText = beer.abv;
+
+  abv.appendChild(beerAbv);
+
   wrapper.appendChild(abv);
   // const brewed = card.querySelector(".beer-card__brewed");
   const brewed = document.createElement("p");
@@ -277,12 +285,17 @@ sortPanel.addEventListener("click", function onSortPanel(evt) {
   }
   evt.preventDefault();
   if (target.classList.contains("button__sort")) {
-    const element = "name";
+    const classes = target.className;
+
+    const regexp = /sort--(.*)/;
+    const element = classes.match(regexp)[1];
+
     onSort(element);
   }
 });
 
-const onSort = element => {
+let reverse = false;
+const onSort = (element: string) => {
   const beforeSorting = [];
   let afterSorting = [];
 
@@ -291,12 +304,16 @@ const onSort = element => {
     const beerName = card.querySelector(`.beer-card__beer-${element}`)
       .textContent;
     beforeSorting.push(beerName);
-    // const abv = card.querySelector(".beer-card__abv");
   });
-
-  afterSorting = beforeSorting.sort();
+  if (isNaN(beforeSorting[0])) {
+    // @ts-ignore
+    afterSorting = beforeSorting.sort((a, b) => (reverse ? a < b : b < a));
+  } else {
+    afterSorting = beforeSorting.sort((a, b) => (reverse ? a - b : b - a));
+  }
+  reverse = !reverse;
   beerCards.forEach(card => {
-    const name = card.querySelector(`.beer-card__beer-${element}`);
+    const name: any = card.querySelector(`.beer-card__beer-${element}`);
     for (const index in afterSorting) {
       const sortName = afterSorting[index];
       if (name.textContent === sortName) {
