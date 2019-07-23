@@ -77,6 +77,7 @@ const getBeers = async (currentPage: number) => {
   });
   createSearch(beersNames);
 };
+
 getBeers(PAGE.current);
 
 const _transformBeers = (beer: any) => {
@@ -138,6 +139,8 @@ const getPage = (target: HTMLElement) => {
   getBeers(PAGE.current);
 };
 
+const cache = [];
+
 // Favorites
 const main = document.querySelector(".main");
 main.addEventListener("click", function favoriteHandler(evt) {
@@ -146,7 +149,7 @@ main.addEventListener("click", function favoriteHandler(evt) {
     return;
   }
 
-  const beerName = favorite.parentElement.querySelector(".beer-card__name")
+  const beerName = favorite.parentElement.querySelector(".beer-card__beer-name")
     .innerText;
 
   if (!favorite.checked) {
@@ -156,19 +159,53 @@ main.addEventListener("click", function favoriteHandler(evt) {
   }
 });
 
+let clicked = false;
+const favoriteBtn = document.querySelector(".main-header__favorite");
+favoriteBtn.addEventListener("click", (evt: MouseEvent) => {
+  evt.preventDefault();
+
+  if (!clicked) {
+    clicked = true;
+    pagination.setAttribute("style", "visibility: hidden");
+    favoriteBtn.innerText = `back`;
+    favoriteBtn.setAttribute("style", "background-color: green");
+
+    const newMain = new DocumentFragment();
+
+    console.log(cache);
+
+    for (const item of cache) {
+      const cacheItemName = item.querySelector(".beer-card__beer-name")
+        .textContent;
+
+      if (localStorage.getItem(`favorite_${cacheItemName}`)) {
+        newMain.appendChild(item);
+      }
+    }
+
+    main.innerHTML = "";
+    main.appendChild(newMain);
+  } else {
+    clicked = false;
+    pagination.removeAttribute("style");
+    favoriteBtn.innerText = `favorite`;
+    favoriteBtn.removeAttribute("style");
+    getBeers(PAGE.current);
+  }
+});
+
 // CreateBeerCard
 const createCard = beer => {
   const card = document.createElement("article");
   card.className = "beer-card";
 
-  // const img = card.querySelector(".beer-card__image");
   const img = document.createElement("img");
   img.className = "beer-card__image";
   img.src = beer.img;
   card.appendChild(img);
   const wrapper = document.createElement("div");
   wrapper.className = "beer-card__wrapper";
-  // const name = card.querySelector(".beer-card__name");
+
   const name = document.createElement("p");
   name.className = "beer-card__name";
   name.innerText = "name: ";
@@ -178,14 +215,13 @@ const createCard = beer => {
   beerName.innerText = beer.name;
 
   name.appendChild(beerName);
-
   wrapper.appendChild(name);
-  // const tagline = card.querySelector(".beer-card__tagline");
+
   const tagline = document.createElement("p");
   tagline.className = "beer-card__tagline";
   tagline.innerText = "tagline: " + beer.tagline;
   wrapper.appendChild(tagline);
-  // const abv = card.querySelector(".beer-card__abv");
+
   const abv = document.createElement("p");
   abv.className = "beer-card__abv";
   abv.innerText = "abv: ";
@@ -195,26 +231,25 @@ const createCard = beer => {
   beerAbv.innerText = beer.abv;
 
   abv.appendChild(beerAbv);
-
   wrapper.appendChild(abv);
-  // const brewed = card.querySelector(".beer-card__brewed");
+
   const brewed = document.createElement("p");
   brewed.className = "beer-card__brewed";
   brewed.innerText = "brewed: " + beer.brewed;
   wrapper.appendChild(brewed);
   card.appendChild(wrapper);
-  // const description = card.querySelector(".beer-card__description");
+
   const description = document.createElement("p");
   description.className = "beer-card__description";
   card.appendChild(description);
   description.innerText = "description: " + beer.description;
-  // const favorite = card.querySelector(".beer-card__favorite-checkbox");
+
   const favorite = document.createElement("input");
   favorite.className = "beer-card__favorite-checkbox";
   favorite.type = "checkbox";
   favorite.title = "В избранное";
   if (localStorage.length > 0) {
-    if (localStorage.getItem(`favorite_${name.innerText}`)) {
+    if (localStorage.getItem(`favorite_${beer.name}`)) {
       favorite.checked = true;
     } else {
       favorite.checked = false;
@@ -223,6 +258,18 @@ const createCard = beer => {
   card.appendChild(favorite);
 
   main.appendChild(card);
+
+  if (cache.length !== 0) {
+    for (const item of cache) {
+      const cacheItemName = item.querySelector(".beer-card__beer-name")
+        .textContent;
+
+      if (cacheItemName === beer.name) {
+        return;
+      }
+    }
+  }
+  cache.push(card);
 };
 
 // Search
@@ -332,4 +379,8 @@ const onSort = (element: string) => {
       }
     }
   });
+};
+
+const removeChildren = (elem: any) => {
+  elem.innerHTML = "";
 };
