@@ -1,9 +1,0 @@
-{
-  "scripts": {
-    "start": "parcel src/index.html"
-  },
-  "devDependencies": {
-    "cssnano": "^4.1.10",
-    "typescript": "^3.5.3"
-  }
-}
