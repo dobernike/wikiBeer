@@ -171,7 +171,13 @@ const createCard = beer => {
   // const name = card.querySelector(".beer-card__name");
   const name = document.createElement("p");
   name.className = "beer-card__name";
-  name.innerText = "name: " + beer.name;
+
+  const beerName = document.createElement("span");
+  beerName.className = "beer-card__beer-name";
+  beerName.innerText = beer.name;
+  name.innerText = "name: ";
+  name.appendChild(beerName);
+
   wrapper.appendChild(name);
   // const tagline = card.querySelector(".beer-card__tagline");
   const tagline = document.createElement("p");
@@ -259,4 +265,44 @@ const createSearch = (beersNames: string[]) => {
   }
 
   searchFlex.replaceChild(search, mockSearch);
+};
+
+// Sorting
+const sortPanel = document.querySelector(".search-sort");
+sortPanel.addEventListener("click", function onSortPanel(evt) {
+  const target = evt.target as HTMLElement;
+
+  if (!target.classList.contains("button__sort")) {
+    return;
+  }
+  evt.preventDefault();
+  if (target.classList.contains("button__sort")) {
+    const element = "name";
+    onSort(element);
+  }
+});
+
+const onSort = element => {
+  const beforeSorting = [];
+  let afterSorting = [];
+
+  const beerCards = document.querySelectorAll(".beer-card");
+  beerCards.forEach(card => {
+    const beerName = card.querySelector(`.beer-card__beer-${element}`)
+      .textContent;
+    beforeSorting.push(beerName);
+    // const abv = card.querySelector(".beer-card__abv");
+  });
+
+  afterSorting = beforeSorting.sort();
+  beerCards.forEach(card => {
+    const name = card.querySelector(`.beer-card__beer-${element}`);
+    for (const index in afterSorting) {
+      const sortName = afterSorting[index];
+      if (name.textContent === sortName) {
+        card.setAttribute("style", `order: ${index}`);
+        break;
+      }
+    }
+  });
 };
