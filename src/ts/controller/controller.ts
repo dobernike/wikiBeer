@@ -31,11 +31,11 @@ export default class Controller {
 
     if (target.innerText === "left") {
       const havePage = this.model.havePage(target.innerText);
-      havePage ? this.debounce(this.getPage, -1) : null;
+      havePage ? this.debounce(this.setPage, -1) : null;
     } else if (target.innerText === "right") {
       const havePage = this.model.havePage(target.innerText);
-      havePage ? this.debounce(this.getPage, +1) : null;
-    } else this.debounce(this.getNumberPage, +target.innerText);
+      havePage ? this.debounce(this.setPage, +1) : null;
+    } else this.debounce(this.setNumberPage, +target.innerText);
     return;
   }
 
@@ -51,11 +51,11 @@ export default class Controller {
     }, this.model.DEBOUNCE_INTERVAL);
   };
 
-  getPage = (target: number) => this.model.setPage(target);
+  setPage = (target: number) => this.model.setPage(target);
 
-  getNumberPage = (target: number) => this.model.setNumberPage(target);
+  setNumberPage = (target: number) => this.model.setNumberPage(target);
 
-  async handleBeers(beersJSON: any) {
+  handleBeers(beersJSON: any) {
     this.view.clearMain();
 
     beersJSON.then((beersJSON: any) => {
