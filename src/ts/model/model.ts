@@ -58,10 +58,7 @@ export default class Model {
     this.cache.push(card);
   }
 
-  checkFavorite(favorite: HTMLElement) {
-    const beerName = favorite.parentElement.querySelector(
-      ".beer-card__beer-name"
-    ).textContent;
+  checkFavorite(favorite: HTMLElement, beerName: HTMLElement) {
 
     if (!favorite.checked) {
       localStorage.removeItem(`favorite_${beerName}`);
@@ -93,11 +90,10 @@ export default class Model {
     this.clicked = value;
   }
 
-  onSort(element: string) {
+  onSort(element: string, beerCards) {
     const beforeSorting = [];
     let afterSorting = [];
 
-    const beerCards = document.querySelectorAll(".beer-card");
     beerCards.forEach(card => {
       const beerName = card.querySelector(`.beer-card__beer-${element}`)
         .textContent;

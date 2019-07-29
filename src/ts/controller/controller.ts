@@ -141,7 +141,10 @@ export default class Controller {
     if (favorite.tagName !== "INPUT") {
       return;
     }
-    this.model.checkFavorite(favorite);
+    const beerName = favorite.parentElement.querySelector(
+      ".beer-card__beer-name"
+    ).textContent;
+    this.model.checkFavorite(favorite, beerName);
   }
 
   handleFavoriteBtn(evt: Event, favoriteBtn: Element) {
@@ -176,7 +179,8 @@ export default class Controller {
       const regexp = /sort--(.*)/;
       const element = classes.match(regexp)[1];
 
-      const cards = this.model.onSort(element);
+      const beerCards = document.querySelectorAll(".beer-card");
+      const cards = this.model.onSort(element, beerCards);
       cards.forEach((card: Element, index: number) =>
         this.view.showSortedCard(card, index)
       );
