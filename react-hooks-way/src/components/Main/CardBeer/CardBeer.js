@@ -1,6 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 export default function CardBeer(props) {
+  const [favorite, setFavorite] = useState(false);
+
+  useEffect(() => {
+    checkFavorite();
+  });
+
+  const checkFavorite = () => {
+    if (localStorage.getItem(`favorite_${props.name}`)) {
+      setFavorite(true);
+    } 
+    // else {
+    //   setFavorite(false);
+    // }
+  }
+
+  const updateFavorite = () => {
+    if (localStorage.getItem(`favorite_${props.name}`)) {
+      localStorage.removeItem(`favorite_${props.name}`)
+      setFavorite(false);
+    } else {
+      localStorage.setItem(`favorite_${props.name}`, true)
+      setFavorite(true);
+    }
+  }
+
   return (
     <article className="beer-card">
       <h2 className="visually-hidden">Карточка товара "пива"</h2>
@@ -15,7 +40,8 @@ export default function CardBeer(props) {
       <input
         className="beer-card__favorite-checkbox"
         type="checkbox"
-        checked={props.favorite}
+        checked={favorite}
+        onClick={updateFavorite}
         title="В избранное"
       />
     </article>
