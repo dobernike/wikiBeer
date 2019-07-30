@@ -13,9 +13,9 @@ export default function Main(props) {
     }
   }
 
- props.beers.map((beer) => cards.push( <CardBeer image={beer.img}
-   name={beer.name} tagline={beer.tagline} abv={beer.abv} brewed={beer.brewed} 
-   description={beer.description} favorite={true} />));
+  props.beers.map((beer, index) => cards.push(<CardBeer key={beer.name + index} image={beer.img}
+    name={beer.name} tagline={beer.tagline} abv={beer.abv} brewed={beer.brewed}
+    description={beer.description} favorite={true} />));
 
   return <main className="main container">{cards}</main>;
 }
