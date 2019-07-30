@@ -2,10 +2,7 @@ import React from "react";
 import CardBeer from "./CardBeer/CardBeer";
 
 export default function Main(props) {
-  const cards = []; // props.cards;
-
-
-
+  const cards = [];
 
   props.beers.map((beer, index) => {
     return cards.push(<CardBeer key={beer.name + index} image={beer.img}

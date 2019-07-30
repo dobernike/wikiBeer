@@ -10,7 +10,7 @@ export default function CardBeer(props) {
   const checkFavorite = () => {
     if (localStorage.getItem(`favorite_${props.name}`)) {
       setFavorite(true);
-    } 
+    }
     // else {
     //   setFavorite(false);
     // }
@@ -41,7 +41,7 @@ export default function CardBeer(props) {
         className="beer-card__favorite-checkbox"
         type="checkbox"
         checked={favorite}
-        onClick={updateFavorite}
+        onChange={updateFavorite}
         title="В избранное"
       />
     </article>

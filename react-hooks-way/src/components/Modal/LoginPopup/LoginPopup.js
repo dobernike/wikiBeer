@@ -1,15 +1,15 @@
 import React from "react";
 
-export default function LoginPopup() {
+export default function LoginPopup(props) {
   return (
     <div className="modal modal-login">
       <h2 className="modal-login__title">Личный кабинет</h2>
       <p className="modal-login__text">
         Введите свой логин и пароль, чтобы войти
       </p>
-      <form className="modal-login__form" action="#" method="post">
+      <form className="modal-login__form" action="#" onSubmit={props.onSubmit} method="post">
         <p className="modal-login__item">
-          <label className="visually-hidden" for="user-name">
+          <label className="visually-hidden" htmlFor="user-name">
             Имя
           </label>
           <input
@@ -18,12 +18,12 @@ export default function LoginPopup() {
             id="user-name"
             name="login"
             placeholder="Имя..."
-            autocomplete="on"
+            autoComplete="on"
             required
           />
         </p>
         <p className="modal-login__item">
-          <label className="visually-hidden" for="user-email">
+          <label className="visually-hidden" htmlFor="user-email">
             Email
           </label>
           <input
@@ -32,12 +32,12 @@ export default function LoginPopup() {
             id="user-email"
             name="email"
             placeholder="Email..."
-            autocomplete="on"
+            autoComplete="on"
             required
           />
         </p>
         <p className="modal-login__item">
-          <label className="visually-hidden" for="user-password">
+          <label className="visually-hidden" htmlFor="user-password">
             Пароль
           </label>
           <input
@@ -46,9 +46,9 @@ export default function LoginPopup() {
             id="user-password"
             name="password"
             placeholder="Пароль..."
-            minlength="6"
-            maxlength="12"
-            autocomplete="on"
+            minLength="6"
+            maxLength="12"
+            autoComplete="on"
             required
           />
         </p>
@@ -62,6 +62,7 @@ export default function LoginPopup() {
           className="modal-login__button 
 modal-login__button--close button"
           type="button"
+          onClick={props.onClose}
         >
           Закрыть
         </button>
