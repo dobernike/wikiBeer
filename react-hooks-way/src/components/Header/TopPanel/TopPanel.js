@@ -14,6 +14,7 @@ export default function TopPanel(props) {
           href="/login"
           className="main-header__sing-in button button--red "
           type="button"
+          onClick={props.changeModal}
         >
           sing in
         </a>

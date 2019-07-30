@@ -10,7 +10,18 @@ const COUNT_CARDS = 6;
 
 
 export default function App() {
+  const [modalOpen, setModalOpen] = useState(false);
   const [beers, setBeers] = useState([]);
+
+  const changeModal = evt => {
+    evt.preventDefault();
+    setModalOpen(prevModalOpen => !prevModalOpen);
+  };
+
+  const submitHadle = evt => {
+    changeModal(evt);
+    console.warn("Вы вошли!");
+  }
 
   const updateCards = (currentPage = 1, cardsPerPage = COUNT_CARDS) => {
     getBeers(currentPage, cardsPerPage).then(fetchBeers => setBeers(fetchBeers));
@@ -19,17 +30,17 @@ export default function App() {
   if (beers.length === 0) updateCards();
 
   const getMain = () => {
-    return beers.length !== 0
-      ? <Main beers={beers} />
-      : null;
+    return beers.length !== 0 ?
+      <Main beers={beers} /> :
+      null;
   }
 
   return (
     <>
-      <Header />
-      { getMain() }
+      <Header changeModal={changeModal} />
+      {getMain()}
       <Footer />
-      <Modal />
+      <Modal isOpen={modalOpen} onClose={changeModal} onSubmit={submitHadle} />
     </>
   );
 }
