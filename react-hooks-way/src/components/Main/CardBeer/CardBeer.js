@@ -27,7 +27,7 @@ export default function CardBeer(props) {
   }
 
   return (
-    <article className="beer-card">
+    <article className="beer-card" style={props.cardStyle}>
       <h2 className="visually-hidden">Карточка товара "пива"</h2>
       <img className="beer-card__image" src={props.image} alt="Бутылка пива" />
       <div className="beer-card__wrapper">

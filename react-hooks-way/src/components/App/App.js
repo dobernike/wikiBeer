@@ -12,6 +12,7 @@ const COUNT_CARDS = 6;
 export default function App() {
   const [modalOpen, setModalOpen] = useState(false);
   const [beers, setBeers] = useState([]);
+  const [searchName, setSearchName] = useState('');
 
   const changeModal = evt => {
     evt.preventDefault();
@@ -29,16 +30,17 @@ export default function App() {
 
   if (beers.length === 0) updateCards();
 
-  const getMain = () => {
-    return beers.length !== 0 ?
-      <Main beers={beers} /> :
-      null;
+  const searchHandler = evt => {
+    evt.preventDefault();
+    const search = evt.target[0];
+
+    setSearchName(search.value);
   }
 
   return (
     <>
-      <Header changeModal={changeModal} />
-      {getMain()}
+      <Header changeModal={changeModal} beers={beers} searchHandler={searchHandler} />
+      <Main beers={beers} searchName={searchName} />
       <Footer />
       <Modal isOpen={modalOpen} onClose={changeModal} onSubmit={submitHadle} />
     </>
