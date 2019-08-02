@@ -1,10 +1,9 @@
 import React from "react";
 import CardBeer from "./CardBeer/CardBeer";
 
-export default function Main({ beers, searchName } = {}) {
+export default function Main({ beers, searchName, sortName } = {}) {
   const cards = [];
-
-
+  
   beers.map((beer, index) => {
     let cardStyle = searchName === beer.name ? { borderColor: `red`, order: -1 } : {};
 

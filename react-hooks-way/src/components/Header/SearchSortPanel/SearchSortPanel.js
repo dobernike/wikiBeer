@@ -22,12 +22,12 @@ export default function SearchSortPanel(props) {
       <div className="sort">
         <button
           className="button button--red button__sort button__sort--name"
-          type="button">
+          type="button" onClick={() => props.onSortPanel(`name`)}>
           Sort name
         </button>
         <button
           className="button button--red button__sort button__sort--abv"
-          type="button">
+          type="button" onClick={() => props.onSortPanel(`abv`)}>
           Sort abv
         </button>
       </div>

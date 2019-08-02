@@ -6,7 +6,7 @@ export default function Header(props) {
   return (
     <header className="main-header">
       <TopPanel changeModal={props.changeModal} />
-      <SearchSortPanel beers={props.beers} searchHandler={props.searchHandler} />
+      <SearchSortPanel beers={props.beers} searchHandler={props.searchHandler} onSortPanel={props.onSortPanel} />
     </header>
   );
 }
