@@ -135,7 +135,6 @@ export default function App() {
 
   // Cache
   const handleCache = (card) => {
-
     const beerName = card.name;
 
     if (cache.length !== 0) {
@@ -181,7 +180,7 @@ export default function App() {
       if (localStorage.getItem(`favorite_${cacheItemName}`)) {
         newMain.push(item);
       }
-      
+
     }
     return newMain;
   }

@@ -204,8 +204,6 @@ img {
 
 /* modals */
 .modal {
-  /* display: none; */
-
   position: fixed;
 
   box-shadow: 0 30px 50px rgba(0, 0, 0, 0.7);
@@ -213,7 +211,6 @@ img {
 }
 
 .modal-overlay {
-  /* display: none; */
   position: fixed;
   top: 0;
   left: 0;
@@ -222,11 +219,6 @@ img {
 
   z-index: 2;
 }
-
-/* .modal-show {
-  display: block;
-  animation: bounce 0.6s;
-} */
 
 .modal-login {
   top: 136px;

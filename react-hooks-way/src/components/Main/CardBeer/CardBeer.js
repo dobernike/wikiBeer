@@ -11,9 +11,6 @@ export default function CardBeer(props) {
     if (localStorage.getItem(`favorite_${props.name}`)) {
       setFavorite(true);
     }
-    // else {
-    //   setFavorite(false);
-    // }
   }
 
   const updateFavorite = () => {

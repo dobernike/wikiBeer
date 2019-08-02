@@ -13,23 +13,6 @@ async function getBeers(currentPage, cardsPerPage) {
   return beers;
 }
 
-// function handleBeers(beersJSON) {
-// this.view.clearMain();
-
-// beersJSON.then((beersJSON) => {
-// const beers = beersJSON.map(_transformBeers);
-// return beers;
-// const beersNames = [];
-// beers.forEach((beer: any) => {
-// beersNames.push(beer.name);
-// const card = this.view.createCard(beer);
-// this.handleCache(card);
-// });
-
-// this.createSearch(beersNames);
-// });
-// }
-
 function _transformBeers(beer) {
   return {
     img: beer.image_url,
