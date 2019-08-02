@@ -8,12 +8,15 @@ import Modal from "../Modal/Modal";
 
 const COUNT_CARDS = 6;
 const DEBOUNCE_INTERVAL = 500;
+const cache = [];
 
 export default function App() {
   const [modalOpen, setModalOpen] = useState(false);
   const [beers, setBeers] = useState([]);
   const [searchName, setSearchName] = useState('');
   const [reverse, setReverse] = useState(false);
+  const [clicked, setClicked] = useState(false);
+  const [paginationOpen, setPaginationOpen] = useState(true);
   const [PAGE, setPage] = useState({
     FIRST: 1,
     current: 1,
@@ -130,11 +133,64 @@ export default function App() {
     }, DEBOUNCE_INTERVAL);
   };
 
+  // Cache
+  const handleCache = (card) => {
+
+    const beerName = card.name;
+
+    if (cache.length !== 0) {
+      for (const item of cache) {
+        const cacheItemName = item.name;
+        if (cacheItemName === beerName) return;
+      }
+    }
+    cache.push(card);
+  }
+
+  // Favorites
+  const handleFavoriteBtn = evt => {
+    evt.preventDefault();
+    const favoriteBtn = evt.target;
+
+    if (!clicked) {
+      setClicked(true);
+
+      setPaginationOpen(false);
+      favoriteBtn.innerText = `back`;
+      favoriteBtn.setAttribute("style", "background-color: green");
+
+      const newMain = showFavorite();
+
+      setBeers(newMain);
+    } else {
+      setClicked(false);
+
+      setPaginationOpen(true);
+      favoriteBtn.innerText = `favorite`;
+      favoriteBtn.removeAttribute("style");
+
+      updateCards();
+    }
+  }
+
+  const showFavorite = () => {
+    const newMain = [];
+    for (const item of cache) {
+      const cacheItemName = item.name;
+
+      if (localStorage.getItem(`favorite_${cacheItemName}`)) {
+        newMain.push(item);
+      }
+      
+    }
+    return newMain;
+  }
+
   return (
     <>
-      <Header changeModal={changeModal} beers={beers} searchHandler={searchHandler} onSortPanel={onSort} />
-      <Main beers={beers} searchName={searchName} />
-      <Footer handlePagination={handlePagination} page={PAGE} />
+      <Header changeModal={changeModal} beers={beers} searchHandler={searchHandler} onSortPanel={onSort} handleFavoriteBtn={handleFavoriteBtn} />
+      <Main beers={beers} searchName={searchName} handleCache={handleCache} />
+      <Footer handlePagination={handlePagination} page={PAGE} isOpen={paginationOpen} />
       <Modal isOpen={modalOpen} onClose={changeModal} onSubmit={submitHadle} />
     </>
   );

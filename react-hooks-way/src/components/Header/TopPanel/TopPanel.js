@@ -7,6 +7,7 @@ export default function TopPanel(props) {
         <button
           className="main-header__favorite button button--red "
           type="button"
+          onClick={props.handleFavoriteBtn}
         >
           favorite
         </button>
